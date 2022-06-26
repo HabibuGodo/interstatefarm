@@ -1,0 +1,64 @@
+{% extends 'website/navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+                <div class="myForm">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <h4 class="text-center alert alert-info">{{title}}</h4>
+                        </div>
+                        <div class="row">
+                            <center>
+                                {% if messages %}
+                                {% for message in messages %}
+                                <div style="background: #dab2b2; margin-inline: 10px; padding: 3px;">
+                                    <p {% if message.tags %} class="{{message.tags}}" {%endif %}>
+                                        {{ message}}
+                                    </p>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </center>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form.paid_amount_tzs |as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form.proof_of_payment |as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><input type="submit" class="btn btn-primary" value="Save Payment"></p>
+
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

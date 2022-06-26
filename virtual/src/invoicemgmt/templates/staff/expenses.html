@@ -1,0 +1,87 @@
+{% extends 'website/navbar.html' %}
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="info_content">
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <h4 class="text-center alert alert-info">ALL EXPENSES</h4>
+                    </div>                 
+                    <br>
+                    <button class="btn btn-success">
+                        <a href="/add_expenses" style="color: white; text-decoration: none;">
+                            <i class='glyphicon glyphicon-plus'></i>
+                            Add Expenses
+                        </a>
+                    </button>
+                    <center>
+                        <form method="POST" action="">{% csrf_token %}
+                            <div class="row">
+                                <!-- Customer: <input type="text" name="customer" /> -->
+                                From: <input type="date" name="fromDate" />
+                                To: <input type="date" name="toDate"  />
+                                <input type="submit" value="View Expenses" class="btn btn-primary"/>
+                            </div>
+                        </form>
+                    </center>
+                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>PAYEE</th>
+                                <th>DESCRIPTION</th>
+                                <th>AMOUNT (TZS)</th>
+                                <th>DATE</th>
+                                <th>PAID BY</th>
+                                <th style="text-align: center;">PROOF OF PAYMENT</th>
+                               
+                            </tr>
+                        </thead>
+                        {%if payments|length == 0 %}
+                        <tr><td colspan="7"><h5>No Any Expenses Has Done</h5></td></tr>
+                        {%endif%}
+                        {% for payment in payments %}
+                        <tr style="text-align: start;">
+                            <td>{{forloop.counter}}</td>
+                            <td >{{payment.payee}}</td>
+                            <td>{{payment.description}}</td>
+                            <td>{{payment.paid_amount}}</td>
+                            <td>{{payment.payment_date}}</td>
+                            <td>{{payment.updated_by}}</td>
+                            
+                            <td style="text-align: center;">
+                                <button class="btn btn-success" id="edit-btn"><a
+                                        href="{{payment.proof_of_payment.url}}" download="{{payment.proof_of_payment.url}}"
+                                        style="color: white; text-decoration: none;">Download</a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="col-sm-2" style="margin-top: 85px; background-color: rgb(190, 190, 185);">
+
+                    <div class="">
+                        <span class=""> <h3><b>TOTAL EXPENSES</b></h3></span>
+                    </div>
+                    <hr>
+                    <div class="recent-content">
+                        <div>
+                            <div class="name"><h4><b>TSH: {{totat_expense.sum_of_tzs}}</b></h4></div>
+                            <!-- <div class="name"><h4><b>USD: {{totat_deni.sum_of_usd}}</b></h4></div> -->
+                            
+                        </div>
+    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

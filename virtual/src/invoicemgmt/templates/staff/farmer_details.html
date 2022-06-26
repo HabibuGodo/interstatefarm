@@ -1,0 +1,125 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="info_content">
+                    <div class="col-sm-8">
+                        <div class="overflow-x-auto" style="background-color: aliceblue; padding: 20px;">
+
+                            <div class="row" style="text-align: center;">
+                                <div class="form-group col-sm-12">
+                                    <h2><b>TAARIFA ZA MKULIMA</b></h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12" style="align-items: right;">
+
+                                    <button class="btn btn-danger" id="edit-btn"><a
+                                            href="{% url 'updateFarmer' farmerDetails.id %}"
+                                            style="color: white; text-decoration: none;">Weka Taarifa Za
+                                            Shamba</a></button>
+
+                                </div>
+                            </div>
+                            <hr style="background-color: rgb(82, 80, 80);">
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> JINA: </b> {{farmerDetails.jina}}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Namba Ya Simu: </b> {{farmerDetails.namba_yasimu}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Jina La Kijiji: </b>
+
+                                    {{farmerDetails.kijiji}}
+
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Kitongoji: </b> {{farmerDetails.kitongoji}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Zao: </b>
+                                    {{farmerDetails.zao}}
+
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Aina Ya Kilimo: </b> {{farmerDetails.aina_yaKilimo}}
+                                </div>
+                            </div>
+                            <hr style="background-color: rgb(82, 80, 80);">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>TAREHE</th>
+                                                <th>KUANDAA SHAMBA</th>
+                                                <th>KUPANDA</th>
+                                                <th>HARI YA SHAMBA</th>
+                                                <th>HARI YA HEWA</th>
+                                                <th>MABADIRIKO</th>
+                                                <th>MAVUNO</th>
+                                                <th>MAONI</th>
+                                                <!-- <th>ACTION</th> -->
+                                            </tr>
+                                            {%if shamba|length == 0 %}
+                                            <tr>
+                                                <td colspan="8">
+                                                    <h5>Taarifa Za Shamba Hazijawekwa Bado</h5>
+                                                </td>
+                                            </tr>
+                                            {%endif%}
+                                        </thead>
+                                        {% for instance in shamba %}
+                                        <tr style="text-align: start;">
+                                            <td>{{instance.tarehe}}</td>
+                                            <td>{{instance.kuandaa_shamba}}</td>
+                                            <td>{{instance.kupanda}}</td>
+                                            <td>{{instance.hari_ya_shamba}}</td>
+                                            <td>{{instance.hari_ya_hewa}}</td>
+                                            <td>{{instance.mabadiriko}}</td>
+                                            <td>{{instance.mavuno}}</td>
+                                            <td>{{instance.maoni}}</td>
+                                            <!-- <td>
+                                                <button class="btn btn-success" id="edit-btn"><a
+                                                        href="{% url 'farmerDetails' instance.id %}"
+                                                        style="color: white; text-decoration: none;">View</a></button>
+                
+                                            </td> -->
+                                        </tr>
+
+                                        {% endfor %}
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                {{ m|safe }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+</html>

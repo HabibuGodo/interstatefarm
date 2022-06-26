@@ -1,0 +1,89 @@
+{% extends 'website/navbar.html' %}
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="info_content">
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-9">
+                    <!-- <button class="btn btn-default">
+                        <a href="/add_deni/" style="color: black; text-decoration: none;">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Debt
+                        </a>
+                    </button> -->
+                    <br>
+                    <br>
+                    <form method="get" action="" role="order_search">
+                        <div class="row">
+
+                            <div class="col-sm-10 form-group">
+                                {{myFilter.form}}
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>AMOUNT (TZS)</th>
+                                <!-- <th>AMOUNT (USD)</th> -->
+                                <th>DATE</th>
+                                <th>PAYMENT DUE</th>
+                                <th>ADDED BY</th>
+
+                            </tr>
+                        </thead>
+                        {%if madeni|length == 0 %}
+                        <tr>
+                            <td colspan="7">
+                                <h5>No any debt</h5>
+                            </td>
+                        </tr>
+                        {%endif%}
+                        {% for deni in madeni %}
+                        <tr style="text-align: start;">
+                            <td>{{forloop.counter}}</td>
+                            <td>{{deni.customer}}</td>
+                            <td>{{deni.deni_amount_tzs}}</td>
+                            <!-- <td>{{deni.deni_amount_usd}}</td> -->
+                            <td>{{deni.created_at}}</td>
+                            <td>{{deni.deni_due_date}}</td>
+                            <td>{{deni.served_by}}</td>
+                            <!-- <td>
+                                <button class="btn btn-success" id="edit-btn"><a
+                                        href="#"
+                                        style="color: white; text-decoration: none;">View</a></button>
+                            </td> -->
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <div class="col-sm-2" style="margin-top: 85px; background-color: rgb(190, 190, 185);">
+
+                    <div class="">
+                        <span class=""> <h3><b>TOTAL DEBTS</b></h3></span>
+                    </div>
+                    <hr>
+                    <div class="recent-content">
+                        <div>
+                            <div class="name"><h4><b>TSH: {{totat_deni.sum_of_tzs}}</b></h4></div>
+                            <!-- <div class="name"><h4><b>USD: {{totat_deni.sum_of_usd}}</b></h4></div> -->
+                            
+                        </div>
+    
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

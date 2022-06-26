@@ -1,0 +1,113 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="team">
+    <div class="container" style="text-align: center;">
+        <div class="title">{{title2}}</div>
+        <p>Our inspiration is to see community leaders are accountable and responsive to the citizens,
+            transparent on the use of public resources and in decision making.</p>
+        <div class="" style="margin: 20px;">
+            <div class="row">
+                <!-- <div class="col-sm-2">
+                </div> -->
+                <div class="col-md-8">
+                    <div class="row">
+                        <form class="contact_us_form" action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group col-md-12">
+                                <input type="text" class="form-control" id="name" name="name" value=""
+                                    placeholder="Name" required>
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <input type="email" class="form-control" id="email" name="email" value=""
+                                    placeholder="Email" required>
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <input type="text" class="form-control" id="subject" value="" name="subject"
+                                    placeholder="Subject" required>
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <textarea class="form-control" name="message" id="message" rows="1"
+                                    placeholder="Message" required> </textarea>
+
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button type="submit" value="submit" class="btn green_submit_btn form-control">
+                                    submit now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="our_about_image">
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="contact_us_details">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="c_details_item">
+                            <div class="media">
+                                <div class="media-left">  
+                                    <!-- <i class="fa fa-map-marker"></i> -->
+                                    <i class="mdi mdi-map-marker"></i>
+                                </div>
+                                <div class="media-body">
+                                    <p>{{company_info.location }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="c_details_item">
+                            <div class="media">
+                                <div class="media-left">
+                                    <i class="mdi mdi-email-outline"></i>
+                                    <!-- <i class="fa fa-envelope-o"></i> -->
+                                </div>
+                                <div class="media-body">
+                                    <a href="mailto:{{company_info.email_address}}">{{company_info.email_address}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="c_details_item">
+                            <div class="media">
+                                <div class="media-left">
+                                  
+                                    <i class="mdi mdi-phone-outline"></i>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#">{{company_info.phone_number}}</a>
+                                    <a href="#">{{company_info.phone_number2}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</section>
+<!--================Map Area =================-->
+<section class="map_area">
+    <!-- Start Map -->
+    <div class="container-fluid" >
+        <div class="mapouter"><div class="gmap_canvas"><iframe src="https://maps.google.com/maps?q=zo%20space&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" id="gmap_canvas" frameborder="0" scrolling="no" style="width: 100%; height: 450px;"></iframe><a href="https://fnfmod.net/" style="display:none">fnf mods</a><style>.mapouter{position:relative;text-align:center;height:450px;width:100%;}</style><a href="https://www.googlemapsiframegenerator.com" style="display:none">Google Maps Iframe Generator</a><style>.gmap_canvas{overflow:hidden;background:none!important;height:450px;width:100%;}</style></div></div>
+    </div>
+</section>
+<!--================End Map Area =================-->
+{% include 'website/footer.html' %}
+{% endblock %}

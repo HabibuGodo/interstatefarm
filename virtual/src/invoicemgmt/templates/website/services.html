@@ -1,0 +1,39 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+    <section class="services">
+        <div class="container" style="text-align: center;">
+            <div class="title">{{title}}</div>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. </p>
+            <div style="margin: 20px;">
+                {%for service in services%}
+                <a href="#">
+                    <div>
+                        <div class="card" style="text-align: center;">
+                            <h1 class="titleService" style="padding-top:10px;">{{service.name.upper}}</h1>
+                            <img class="imgT" src="{{service.image.url}}" alt="{{service.name}}" width="220">
+
+                            <p class="paragraph">{{service.description}}</p>
+                            <!-- <h3 class="text-muted ">SUPER & MIN-SUPERMARKETS</h3> -->
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
+
+        </div>
+        <div>
+
+        </div>
+
+    </section>
+
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}

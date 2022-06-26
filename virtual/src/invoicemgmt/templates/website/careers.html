@@ -1,0 +1,54 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+    <section class="careers">
+        <div class="container">
+            <div class="title" style="text-align: center;">{{title2}}</div>
+            <p style="text-align: center;">Interstate Farm ltd is based and registered in Tanzania since November 2016
+                as an agro-business company.
+                Inter State Farm provides comprehensive business solutions to smallholder coffee-farmers in Tanzania by
+                ensuring that they use modern production methods and support them with farming inputs so that they
+                increase coffee returns and ensure the best quality of coffee. The company specifically aim at ensuring
+                there is fair value along the coffee supply chain from the farm to the final coffee consumer.
+                Transparent is the key at all level of the supply chain which enable farmers to get the fair value of
+                their produces which the company buys in an open and fair agreement with the farmers then coffee beans
+                are processed, packed for distribution/sales within the country and export. </p>
+
+            <div class="career-main">
+                {%if careers|length == 0 %}
+                <div class="text-center" style="height:400px; width:100%; padding-top:50px;text-align: center;">
+                    <center><h2><b>No any job opportunity now, check back later.</b></h2></center>
+                </div>
+                {%endif%}
+                {%for career in careers%}
+                {%if career.status == 1 %}
+                <div class="contents">
+                    <a href="{% url 'careersDetails' career.id %}">
+                        <b>{{career.title}}</b>
+                        <p>
+                            {{career.summary}}
+                        </p>
+                    </a>
+                    <button class="btn btn-primary"><a href="{% url 'careersDetails' career.id %}"
+                            style="color: white; ">Apply Now</a></button>
+                </div>
+                {%else %}
+                <div></div>
+                {%endif%}
+                {%endfor%}
+            </div>
+
+        </div>
+        <div>
+
+        </div>
+
+    </section>
+
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}

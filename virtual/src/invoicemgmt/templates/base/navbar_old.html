@@ -1,0 +1,99 @@
+{% load static %}
+{% include 'head.html' %}
+
+<body>
+    {% if request.user.is_authenticated %}
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="logo_content logo">
+                    <img src="../static/img/interstate_logo.png" alt="interstatefarm" width="150">
+                </div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <!-- <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Search...">
+                <span class="tooltip">Search</span>
+            </li> -->
+            <li>
+                <a href="">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="/">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="/add_invoice/">
+                    <i class='bx bx-file'></i>
+                    <span class="links_name">Invoices</span>
+                </a>
+
+                <span class="tooltip">Invoices</span>
+            </li>
+            <li>
+                <a href="/availabe_stocks/">
+                    <i class='bx bxs-store'></i>
+                    <span class="links_name">Stocks</span>
+                </a>
+                <span class="tooltip">Stocks</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Orders</span>
+                </a>
+                <span class="tooltip">Orders</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="../static/img/profiles/Faustine.jpg" alt="kwetukia">
+                    <div class="name_job">
+                        <!-- <div class="name">Faustine Kwetukia</div> -->
+                        <div class="name">{{user.first_name}} {{user.last_name}} </div>
+                        <div class="job">Sales/Marketing</div>
+                    </div>
+                </div>
+                <a href="/accounts/logout">
+                    <i class='bx bx-log-out' id="log_out"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- <div class="home_content">
+        <div class="text">Home Contents</div>
+    </div> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                $(".sidebar").toggleClass("active")
+            });
+        });
+        $(document).ready(function () {
+            $(".bx-search").click(function () {
+                $(".sidebar").toggleClass("active")
+            });
+        });
+    </script>
+</body>

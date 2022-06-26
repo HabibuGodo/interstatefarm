@@ -1,0 +1,44 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="team">
+    <div class="container" style="text-align: center;">
+        <div class="title">{{title}}</div>
+        <p>Our team is like a family where each member’s strength is the team and the team’s strength is every
+            individual member of it. </p>
+        <div class="row d_team_inner" style="margin: 20px;">
+            {% for member in teams %}
+            <div class="col-md-3 col-xs-6">
+                <div class="workers_item">
+                    <div class="workers_img">
+                        <img class="img-circle" src="{{member.image.url}}" alt="{{member.name}}">
+                        <ul>
+                            <li><a href="{{member.facebook}}" target="_blank"><i class="mdi mdi-facebook"></i></a></li>
+                            <li><a href="{{member.twitter}}" target="_blank"><i class="mdi mdi-twitter "
+                                        aria-hidden="true"></i></a></li>
+                            <li><a href="{{member.instagram}}" target="_blank"><i class="mdi mdi-instagram"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#">
+                        <h4>{{member.name}}</h4>
+                    </a>
+                    <h6>{{member.occupation }}</h6>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+
+</section>
+
+{% include 'website/footer.html' %}
+{% endblock %}

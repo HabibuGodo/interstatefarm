@@ -1,0 +1,60 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body>
+    <section class="career-details">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{career.title.upper}} DETAILS</h2>
+                </div>
+                <div class="card-body">
+                    <div class="overflow-x-auto">
+                        <table class="table-striped table table-bordered bold-first-td" style="text-align: left;">
+                            <tr>
+                                <td style="font-weight: bold;">POST</td>
+                                <td>{{career.title}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">APPLICATION DEADLINE:</td>
+                                <td>{{career.deadline}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">JOB SUMMARY</td>
+                                <td>{{career.summary}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">DUTIES AND RESPONSIBILITIES</td>
+                                <td>
+                                    {%for duties in careersDuties%}
+                                    <p>{{duties.dutiesResposibilities}}</p>
+                                    {%endfor%}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">QUALIFICATION AND EXPERIENCE</td>
+                                <td>
+                                    {%for experience in careersExp%}
+                                    <p>{{experience.experience}}</p>
+                                    {%endfor%}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">REMUNERATION</td>
+                                <td> {{career.salary}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <button class="btn btn-primary"><a href="{% url 'careersApply' career.id %}" style="color: white; text-decoration: none;">Apply</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}

@@ -1,0 +1,482 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-11">
+                <div class="info_content">
+                    <div class="col-sm-10">
+                        <div class="myForm">
+                            <form method="POST" action="">{% csrf_token %}
+                                <div style="text-align: center;">
+                                    {%ifequal title 'Update Order' %}
+                                    <h2 style="color: green;">Please update order status below</h2>
+                                    {%else%}
+                                    <h2>Please provide your order information below</h2>
+                                    {%endifequal%}
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" , style="text-align: center; ">
+                                        <!-- singular -->
+                                        <a class="close title" data-dismiss="alert">×</a>
+                                        {{ message|safe }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> BEANS</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> GROUND</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label><b>90 grams:</b> </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_90_beans|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_90_beans|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_90_ground|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_90_ground|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label><b>250 grams:</b> </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_250_beans|as_crispy_field }}
+
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_250_beans|as_crispy_field }}
+
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_250_ground|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_250_ground|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label><b>400 grams:</b> </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_400_beans|as_crispy_field }}
+
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_400_beans|as_crispy_field }}
+
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_400_ground|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_400_ground|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label><b>750 grams:</b> </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_750_beans|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_750_beans|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.gram_750_ground|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.gram_750_ground|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label><b>1 kilogram:</b> </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.kilogram_1_beans|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.kilogram_1_beans|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {%ifequal title 'Update Order' %}
+                                                <div style="pointer-events: none;">
+                                                    {{ form.kilogram_1_ground|as_crispy_field }}
+                                                </div>
+                                                {%else%}
+                                                <div>
+                                                    {{ form.kilogram_1_ground|as_crispy_field }}
+                                                </div>
+                                                {%endifequal%}
+
+                                            </div>
+                                        </div>
+                                        {%if title == 'Update Order'%}
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Total (kg):</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.total_kg_beans|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.total_kg_ground|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="total_kgs"> Total Kilograms:</label>
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.total_kgs|as_crispy_field }}
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> TZS</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> USD</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label> Sub Total:</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_sub_total_tzs|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_sub_total_usd|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="amount_vat"> VAT (18%):</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_vat_tzs|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_vat_usd|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="total_amount"> Total:</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_tzs|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    {{ form.amount_usd|as_crispy_field }}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> Order Status: </label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                {{ form.order_status|as_crispy_field }}
+
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <input style="font-weight: bold;" type="submit" class="btn btn-success"
+                                                    value="Update Order" />
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                        </div>
+                                        {%else%}
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Total (kg):</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="beans_total" value="" readonly
+                                                        class=" form-control" id="beans_total">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+
+                                                    <input type="text" name="ground_total" value="" readonly
+                                                        class=" form-control" id="ground_total">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="total_kgs"> Total Kilograms:</label>
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                   
+                                                    <input type="text" name="total_kgs" value="0" class=" form-control"
+                                                        readonly id="total_kgs">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> TZS</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label> USD</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label> Sub Total:</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="amount_sub_total_tzs" value="" readonly
+                                                        class=" form-control" id="amount_sub_total_tzs">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="amount_sub_total_usd" value="" readonly
+                                                        class=" form-control" id="amount_sub_total_usd">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="amount_vat"> VAT (18%):</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="amount_vat_tzs" value="" readonly
+                                                        class=" form-control" id="amount_vat_tzs">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="amount_vat_usd" value="" readonly
+                                                        class=" form-control" id="amount_vat_usd">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="total_amount"> Total:</label>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="total_amount_tzs" value="" readonly
+                                                        class=" form-control" id="total_amount_tzs">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <div>
+                                                    <input type="text" name="total_amount_usd" value="" readonly
+                                                        class=" form-control" id="total_amount_usd">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <br>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <input style="font-weight: bold;" type="submit" class="btn btn-success"
+                                                    value="Submit Order" />
+
+                                            </div>
+                                            <div class="form-group col-sm-4">
+
+                                            </div>
+
+                                        </div>
+                                        {%endif%}
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}
+
+</html>

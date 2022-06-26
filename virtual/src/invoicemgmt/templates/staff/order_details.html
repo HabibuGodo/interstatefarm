@@ -1,0 +1,228 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-11">
+                <div class="info_content">
+                    <div class="col-sm-6">
+                        <div class="overflow-x-auto" style="background-color: aliceblue; padding: 20px;">
+                            <center>
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <h2>ORDER DETAILS</h2>
+                                    </div>
+
+                                </div>
+                            </center>
+                           
+                            <div class="row">
+                                <div class="form-group col-sm-12" style="text-align: right;">
+                                    {%if user.is_authenticated%}
+                                    {%if user.is_staff == 1 %}
+                                    {% if orderDetails.order_status == 'New' %}
+                                    <button class="btn btn-danger" id=""><a
+                                            href="{% url 'createInvoice' orderDetails.id %}"
+                                            style="color: white; text-decoration: none;">Generate Invoice</a></button>
+                                    {% elif orderDetails.order_status == 'Invoice Generated' or orderDetails.order_status == 'Paid Some' %}
+
+                                    <button class="btn btn-primary" id="myBtn"><a
+                                            href="{% url 'add_payment' orderDetails.id %}"
+                                            style="color: white; text-decoration: none;">
+                                            Add Payment</a></button>
+                                    {%else%}
+                                    <button class="btn btn-success" id=""><a
+                                        href="{% url 'createInvoice' orderDetails.id %}"
+                                        style="color: white; text-decoration: none;">Issue Receipt</a></button>
+                                    {%endif%}
+
+                                    {%endif%}
+                                    {%endif%}
+                                </div>
+                            </div>
+
+                            <hr style="background-color: rgb(82, 80, 80);">
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Order Number: </b> {{orderDetails.id}}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total Beans: </b> {{orderDetails.total_kg_beans}} Kg
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Customer: </b>
+                                    {% ifequal customer_ordered 'staff' %}
+                                    {{orderDetails.customer}}
+
+                                    {%else%}
+                                    {{customer_ordered.customer_name}}
+                                    {%endifequal%}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total Ground: </b> {{orderDetails.total_kg_ground}} Kg
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Phone Number: </b>
+                                    {% ifequal customer_ordered 'staff' %}
+                                    {{orderDetails.email}}
+                                    {%else%}
+                                    {{customer_ordered.phone_number}}
+                                    {%endifequal%}
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-sm-6">
+                                    <b> Order Date: </b> {{orderDetails.order_date}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Order Status: </b> <span class="{% if orderDetails.order_status == 'Pending' %} 
+                                    text-warning 
+                                {%elif orderDetails.order_status == 'Completed' %} 
+                                    text-success 
+                                {%else%}
+                                    text-danger
+                                {%endif%} " style="font-weight: bold;">{{orderDetails.order_status}}</span>
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Sub-Total: </b> {{orderDetails.amount_sub_total_tzs}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% if orderDetails.order_status == 'New' %}
+                                <div class="form-group col-sm-6"></div>
+
+                                {%else%}
+                                <div class="form-group col-sm-6">
+                                    <b> Staff Incharge: </b> {{orderDetails.updated_by}}
+                                </div>
+                                {%endif%}
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> VAT (18%): </b> {{orderDetails.amount_vat_tzs}}
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total (TZS): </b> {{orderDetails.amount_tzs}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total Paid: </b> {{totalpaid}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label> BEANS (PCs)</label>
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    <label> GROUND (PCs)</label>
+                                </div>
+                            </div>
+                            {% if orderDetails.gram_90_beans == 0 and orderDetails.gram_90_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 90 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{orderDetails.gram_90_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{orderDetails.gram_90_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if orderDetails.gram_250_beans == 0 and orderDetails.gram_250_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 250 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{orderDetails.gram_250_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{orderDetails.gram_250_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if orderDetails.gram_400_beans == 0 and orderDetails.gram_400_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 400 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{orderDetails.gram_400_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{orderDetails.gram_400_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if orderDetails.gram_750_beans == 0 and orderDetails.gram_750_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b>750 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{orderDetails.gram_750_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{orderDetails.gram_750_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if orderDetails.kilogram_1_beans == 0 and orderDetails.kilogram_1_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 1 kilogram: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{orderDetails.kilogram_1_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{orderDetails.kilogram_1_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+
+</html>

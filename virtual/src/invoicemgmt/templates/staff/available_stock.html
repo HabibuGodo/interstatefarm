@@ -1,0 +1,108 @@
+{% extends 'website/navbar.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-11">
+                
+                <div class="info_content">
+                    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                        <div class="row">
+                            <h4 class="text-center alert alert-info">AVAILABLE STOCKS</h4>
+                        </div>
+                        {%if buttonTitle %}
+                            <div class="myForm">
+                                <div class="container-fluid">
+                                    <form method='POST' action=''>{% csrf_token %}
+                                        <div class='col-sm-12'>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    {{ form.package_type|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    {{ form.new_stock|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <br>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>PACKAGE NAME</th>
+                                    <th>NEW ADDED (PCS)</th>
+                                    <th>PREVIOUS ADDED (PCS)</th>
+                                    <th>TOTAL (PCS)</th>
+                                    <th>TOTAL (KGS)</th>
+                                    <th>RETAIL TOTAL PRICE (TZS)</th>
+                                    <th>WHOLESALE TOTAL PRICE (TZS)</th>
+                                    <th>ACTION</th>
+
+                                </tr>
+                            </thead>
+                            {% for instance in queryset %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{instance.package_type}}</td>
+                                <td>{{instance.new_stock}}</td>
+                                <td>{{instance.previous_stock}}</td>
+                                <td>{{instance.total}}</td>
+                                <td>{{instance.total_kg}}</td>
+                                <td>{{instance.retail_total_price}}</td>
+                                <td>{{instance.wholesale_total_price}}</td>
+                                <td><button class="btn btn-success"><a
+                                            href="{% url 'availabe_stocks_update' instance.id %}"
+                                            style="color: white; text-decoration: none;">Update</a></button>
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <h6><b>TOTAL</b></h6>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h6><b>{{sumData.sum_of_package}}</b></h6>
+                                </td>
+                                <td>
+                                    <h6><b>{{sumData.sum_of_kilos}}</b></h6>
+                                </td>
+                                <td>
+                                    <h6><b>{{sumData.sum_of_retail_price}}</b></h6>
+                                </td>
+                                <td>
+                                    <h6><b>{{sumData.sum_of_wholesale_price}}</b></h6>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+{% endblock %}

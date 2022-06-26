@@ -1,0 +1,118 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-8">
+                <div class="info_content">
+                    <div class="col-sm-12">
+                        <div class="myForm">
+                            <form method="POST" action="">{% csrf_token %}
+                                <div style="text-align: center;">
+                                    <h2>{{title}}</h2>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" , style="text-align: center; ">
+                                        <!-- singular -->
+                                        <a class="close title" data-dismiss="alert">×</a>
+                                        {{ message|safe }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-8">
+                                        <p><b>TAARIFA ZA KIKUNDI</b></p>
+                                        <div class="row">
+
+                                            <div class="form-group col-sm-12">
+                                                {{ form.namba_yakikundi|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.jina|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                {{ form.namba_yasimu|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.mkoa|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.wilaya|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                {{ form.kata|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <!-- <p><b>TAARIFA ZA SHAMBA</b></p> -->
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.kijiji|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                {{ form.kitongoji|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.zao|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                {{ form.aina_yaKilimo|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.ukubwa_washamba|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                {{ form.kiasi_chambegu|as_crispy_field }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.aina_yaudongo|as_crispy_field }}
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ m|safe }}
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <input style="font-weight: bold;" type="submit" class="btn btn-success"
+                                            value="JISAJILI" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}
+
+</html>

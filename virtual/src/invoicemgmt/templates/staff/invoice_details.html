@@ -1,0 +1,250 @@
+{% extends 'website/navbar.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body style="align-items: center;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-11">
+                <div class="info_content">
+                    <div class="col-sm-6">
+                        <div class="overflow-x-auto" style="background-color: aliceblue; padding: 20px;">
+                            <center>
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <h2>{{title}}</h2>
+                                    </div>
+
+                                </div>
+                            </center>
+                            <div class="row">
+                                <div class="form-group col-sm-12" style="text-align: right;">
+                                    {%if user.is_authenticated%}
+                                    {%if user.is_staff == 1 %}
+
+                                    {%if invoiceDetails.payment_status == "Paid" %}
+
+                                        <button class="btn btn-success" id=""><a
+                                                href="{% url 'createInvoice' invoiceDetails.invoice_number %}"
+                                            style="color: white; text-decoration: none;">Issue Receipt</a></button>
+                                    {%else%}
+                                    <button class="btn btn-success" id="myBtn"><a
+                                            href="{% url 'add_payment' invoiceDetails.invoice_number %}"
+                                            style="color: white; text-decoration: none;">
+                                            Add Panyment</a></button>
+
+                                    {%endif%}
+
+                                    {%endif%}
+                                    {%endif%}
+                                </div>
+                            </div>
+
+                            <hr style="background-color: rgb(82, 80, 80);">
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Invoice Number: </b> 0000-{{invoiceDetails.invoice_number}}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Sub-Total: </b> {{invoiceDetails.sub_total}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Customer: </b>
+                                    {% ifequal customer_ordered 'staff' %}
+                                    {{invoiceDetails.customer_name}}
+
+                                    {%else%}
+                                    {{customer_ordered.customer_name}}
+                                    {%endifequal%}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> VAT (18%): </b> {{invoiceDetails.tax}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Phone Number: </b>
+                                    {% ifequal customer_ordered 'staff' %}
+                                    {{invoiceDetails.phone_number}}
+                                    {%else%}
+                                    {{customer_ordered.phone_number}}
+                                    {%endifequal%}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Discount ({{invoiceDetails.discount_rate}}%): </b> {{invoiceDetails.discount}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Invoice Date: </b> {{invoiceDetails.invoice_date}}
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total To Pay (TZS): </b> {{invoiceDetails.total}}
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Total Beans: </b> {{invoiceDetails.total_kg_beans}} Kg
+                                    
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                    <b> Total To Paid (TZS): </b> {{totalPaid}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <b> Total Ground: </b> {{invoiceDetails.total_kg_ground}} Kg
+                                </div>
+                                <div class="form-group col-sm-6" style="text-align: right;">
+                                   
+                                </div>
+                            </div>
+                           
+                            <hr>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label> BEANS (PCs)</label>
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    <label> GROUND (PCs)</label>
+                                </div>
+                            </div>
+                            {% if invoiceDetails.gram_90_beans == 0 and invoiceDetails.gram_90_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 90 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{invoiceDetails.gram_90_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{invoiceDetails.gram_90_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if invoiceDetails.gram_250_beans == 0 and invoiceDetails.gram_250_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 250 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{invoiceDetails.gram_250_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{invoiceDetails.gram_250_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if invoiceDetails.gram_400_beans == 0 and invoiceDetails.gram_400_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 400 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{invoiceDetails.gram_400_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{invoiceDetails.gram_400_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if invoiceDetails.gram_750_beans == 0 and invoiceDetails.gram_750_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b>750 grams: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{invoiceDetails.gram_750_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{invoiceDetails.gram_750_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if invoiceDetails.kilogram_1_beans == 0 and invoiceDetails.kilogram_1_ground == 0 %}
+                            <div></div>
+                            {%else %}
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <b> 1 kilogram: </b>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {{invoiceDetails.kilogram_1_beans}}
+                                </div>
+                                <div class="form-group col-sm-5" style="text-align: right;">
+                                    {{invoiceDetails.kilogram_1_ground}}
+                                </div>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <center>
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <h2>PAYMENT BREAKDOWN</h2>
+                                </div>
+                            </div>
+                        </center>
+                        <div class="col-sm-12">
+                        
+                            <div class="invoiceTable">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th style="text-align: center;">DATE</th>
+                                            <th  style="text-align: center;">AMOUNT PAID</th>
+                                            <th style="text-align: center;">PROOF OF PAYMENT</th> 
+                                        </tr>
+                                    </thead>
+                                    {%if allPayments|length == 0 %}
+                                    <tr><td colspan="4"><h5>No Any Payment Has Done</h5></td></tr>
+                                    {%endif%}
+                                    {% for payment in allPayments %}
+                                    <tr style="text-align: start;">
+                                        <td>{{forloop.counter}}</td>
+                                        <td style="text-align: center;">{{payment.payment_date}}</td>
+                                        <td  style="text-align: center;">{{payment.paid_amount_tzs}}</td>
+                                        <td style="text-align: center;">
+                                            <button class="btn btn-success" id="edit-btn"><a
+                                                    href="{{payment.proof_of_payment.url}}" download="{{payment.proof_of_payment.url}}"
+                                                    style="color: white; text-decoration: none;">Download</a></button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+    
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+
+</html>

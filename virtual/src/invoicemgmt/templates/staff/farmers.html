@@ -1,0 +1,69 @@
+{% extends 'website/navbar.html' %}
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="info_content">
+            
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="row">
+                        <h4 class="text-center alert alert-info">REGISTERED FARMERS</h4>
+                    </div>
+                    <form method="get" action="" role="order_search">
+                        <div class="row">
+
+                            <div class="col-sm-12 form-group">
+                                {{myFilter.form}}
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>JINA</th>
+                                <th>SIMU</th>
+                                <th>SHAMBA</th>
+                                <th>KIJIJI</th>
+                                <th>KITONGOJI</th>
+                                <th>ZAO</th>
+                                <th>AINA YA KILIMO</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        {% for instance in farmers %}
+                        <tr style="text-align: start;">
+                            <td>{{forloop.counter}}</td>
+                            <td>{{instance.jina}}</td>
+                            <td>{{instance.namba_yasimu}}</td>
+                            <td>{{instance.ukubwa_washamba}}</td>
+                            <td>{{instance.kijiji}}</td>
+                            <td>{{instance.kitongoji}}</td>
+                            <td>{{instance.zao}}</td>
+                            <td>{{instance.aina_yaKilimo}}</td>
+                            <td>
+                                <button class="btn btn-success" id="edit-btn"><a
+                                        href="{% url 'farmerDetails' instance.id %}"
+                                        style="color: white; text-decoration: none;">View</a></button>
+
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </table>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

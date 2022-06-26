@@ -1,0 +1,54 @@
+{% extends 'website/navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="myForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <p>
+                    <h2 class="text-center alert alert-info">Login</h2>
+                    </p>
+                    <div class="row">
+                        {% for message in messages %}
+                        <div style="background: #dab2b2; margin-inline: 10px; padding: 3px;">
+                            <p {% if message.tags %} class="{{message.tags}}" {%endif %}>
+                                {{ message}}
+                            </p>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{form | crispy}}
+                                <!-- <input type="text" class="form-control" name="username" placeholder="Username" /> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <input class="btn btn-primary" type="submit" value="Log in" />
+                    </div>
+                    <p><h4>Forgot your password? <a href="{% url 'password_reset' %}">Reset it</a>.</h4></p>
+                    <p>
+                    <h4>Not a member? <a href="{% url 'register' %}">Register</a>.</h4>
+                    </p>
+
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+{% include 'head.html' %}
+
+<body>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div style="text-align: center; margin-bottom: 30px; color: rgb(99, 53, 20);">
+                    {% block title %}
+                    {% endblock %}
+                </div>
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+
+    
+ 
+</body>

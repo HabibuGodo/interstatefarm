@@ -1,0 +1,74 @@
+{% extends 'website/navbar.html' %}
+{% block content %}
+{% load index %}
+
+<body>
+    <div class="container-fluid">
+        <div class="info_content">
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-9">
+                    <form method="get" action="" role="order_search">
+                        <div class="row">
+
+                            <div class="col-sm-10 form-group">
+                                {{myFilter.form}}
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ORDER#</th>
+                                <th>ORDER DATE</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>TOTAL (KG)</th>
+                                <th>ORDER AMOUNT</th>
+                                <th>PAID AMOUNT</th>
+                                <th>STATUS</th>
+                                <th style="text-align: center;">ACTION</th>
+                            </tr>
+                        </thead>
+                        {%if order|length == 0 %}
+                        <tr>
+                            <td colspan="8">
+                                <h5>No any order yet</h5>
+                            </td>
+                        </tr>
+                        {%endif%}
+                        {% for instance in order %}
+                        <tr style="text-align: left;">
+                            <td>{{instance.id}}</td>
+                            <td>{{instance.order_date}}</td>
+                            <td>{{instance.customer}}</td>
+                            <td>{{instance.total_kgs}}</td>
+                            <td>{{instance.amount_tzs}}</td>
+                            
+                            <td style="font-weight: bold;">{{totalpaid|index:forloop.counter0}}</td>
+                            <td class="{% if instance.order_status == 'Pending' %} 
+                            text-warning 
+                        {%elif instance.order_status == 'Completed' %} 
+                            text-success 
+                        {%else%}
+                        text-danger 
+                        {%endif%} " style="font-weight: bold;">{{instance.order_status}}</td>
+                            <td>
+                                <button class="btn btn-success" id="edit-btn"><a
+                                        href="{% url 'orderDetails' instance.id %}"
+                                        style="color: white; text-decoration: none;">View</a></button>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

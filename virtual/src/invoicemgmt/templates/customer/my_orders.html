@@ -1,0 +1,69 @@
+{% extends 'website/navbar.html' %}
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="info_content">
+            <div class="row">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-8">
+                    <p>
+                    <div class=" ic-flash-success" data-notify-timeout="5000" data-notify-type="info" id="demo"></div>
+                    </p>
+                    <div class="row">
+                        <h4 class="text-center alert alert-info">LIST OF YOUR ORDERS</h4>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>ORDER DATE</th>
+                                <th>TOTAL (KG)</th>
+                                <th>AMOUNT (TZS)</th>
+                                <th>AMOUNT (USD)</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        {%if myOrders|length == 0 %}
+                        <tr><td colspan="7"><h5>You don't have any order for now</h5></td></tr>
+                        {%endif%}
+                        {% for myOrder in myOrders %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{myOrder.order_date}}</td>
+                            <td>{{myOrder.total_kgs}}</td>
+                            <td>{{myOrder.amount_tzs}}</td>
+                            <td>{{myOrder.amount_usd}}</td>
+
+                            <td class="{% if myOrder.order_status == 'Pending' %} 
+                                            text-danger 
+                                        {%elif myOrder.order_status == 'Completed' %} 
+                                            text-success 
+                                        {%endif%} " style="font-weight: bold;">
+                                {% if myOrder.order_status == 'New' %} Received
+                                {%else%}
+                                {{myOrder.order_status}}
+                                {%endif%}
+                            </td>
+
+                            <td>
+                                
+                                <button class="btn btn-success" id="edit-btn"><a
+                                        href="{% url 'orderDetails' myOrder.id %}"
+                                        style="color: white; text-decoration: none;">View</a></button>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-8">
+                <div class="info_content">
+                    <div class="col-sm-12">
+                        <div class="myForm">
+                            <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                                <div style="text-align: center;">
+                                    <h2>Apply Now by providing some information below</h2>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" , style="text-align: center; ">
+                                        <!-- singular -->
+                                        <a class="close title" data-dismiss="alert">×</a>
+                                        {{ message|safe }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-8">
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.fullname|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.email|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.phone_number|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.personal_info|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.education|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                {{ form.experience|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.resume|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                {{ form.letter|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <input style="font-weight: bold;" type="submit" class="btn btn-success"
+                                            value="APPLY NOW" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% include 'website/footer.html' %}
+{% endblock %}
+
+</html>

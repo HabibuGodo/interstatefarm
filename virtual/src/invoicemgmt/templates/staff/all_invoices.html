@@ -1,0 +1,84 @@
+{% extends 'website/navbar.html' %}
+{% load static %}
+
+{% block content %}
+{% load index %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <h4 class="text-center alert alert-info">LIST OF GENERATED INVOICES</h4>
+                </div>
+                <div class="info_content">
+                    <div class="col-sm-12">
+                        
+                        <div class="invoiceTable">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>INVOICE NUMBER</th>
+                                        <th>CUSTOMER NAME</th>
+                                        <th style="text-align: end;">AMOUNT</th>
+                                        <th style="text-align: end;">PAID AMOUNT</th>
+                                        <th style="text-align: center;">DATE</th>
+                                        <th style="text-align: center;">PAYMENT STATUS</th>
+                                        <th style="text-align: center;">ACTION</th>
+                                    </tr>
+                                </thead>
+                                {%if queryset|length == 0 %}
+                                <tr>
+                                    <td colspan="7">
+                                        <h5>No any invoice yet</h5>
+                                    </td>
+                                </tr>
+                                {%endif%}
+                                {% for instance in queryset %}
+
+                                <tr style="text-align: start;">
+                                    <td>{{forloop.counter}}</td>
+                                    <td>0000-{{instance.invoice_number}}</td>
+                                    <td>{{instance.customer_name}}</td>
+                                    <td style="text-align: end; font-weight: bold;">{{instance.total}}</td>
+                                    <td style="text-align: end; font-weight: bold;">{{totalpaid|index:forloop.counter0}}</td>
+                                    <td style="text-align: center;">{{instance.invoice_date}}</td>
+                                    <td style="text-align: center; color: red;">{{instance.payment_status}}</td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-success" id="edit-btn"><a
+                                                href="{% url 'invoice_details' instance.id %}"
+                                                style="color: white; text-decoration: none;">View</a></button>
+                                    </td>
+                                </tr>
+
+                                {% endfor %}
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+
+                <div class="">
+                    <span class="">Filter By</span>
+                </div>
+                <div class="recent-content">
+                    <div>
+                        <div class="name">{{instance.customer_name}}</div>
+                        <div class="">{{instance.invoice_date}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+{% endblock %}
